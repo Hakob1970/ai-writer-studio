@@ -1,0 +1,101 @@
+<!DOCTYPE htm1>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Writer Studio</title>
+    <link rel="stylesheet" href="writer.css">
+</head>
+<body>
+
+<div class="app">
+
+    <!-- HEADER -->
+    <header class="top-bar">
+        <h1>✍️ AI Writer Studio</h1>
+        <p>Create books, essays, and professional content with AI</p>
+    </header>
+
+    <!-- MAIN -->
+    <div class="container">
+
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <h2>Categories</h2>
+
+            <button class="cat active" data-category="Books">📚 Books</button>
+            <button class="cat" data-category="Education">🎓 Education</button>
+            <button class="cat" data-category="Business">💼 Business</button>
+            <button class="cat" data-category="Content">🌐 Content</button>
+            <button class="cat" data-category="Creative">✍️ Creative</button>
+            <button class="cat" data-category="Tools">⚙️ Tools</button>
+
+        </aside>
+
+        <!-- CONTENT -->
+        <main class="main">
+
+            <!-- MODE AREA -->
+            <section class="panel">
+                <h2>Select a category</h2>
+                <div class="modes"></div>
+            </section>
+
+            <!-- FORM AREA -->
+            <section class="panel">
+                <h2>Input Parameters</h2>
+
+                <div class="form" id="dynamicForm">
+                    <input type="text" placeholder="Title / Topic">
+                    <input type="text" placeholder="Main idea">
+                    <textarea placeholder="Additional instructions..."></textarea>
+                </div>
+
+                <button id="generateBtn" class="generate">✨ Generate with AI</button>
+                <button id="cancelBtn" class="cancel" style="display:none;">⛔ Cancel</button>
+
+            </section>
+
+            <!-- CHAT (НОВОЕ) -->
+            <section class="panel">
+                <h2>Conversation</h2>
+
+                <div id="outputChat" class="chat">
+                    <!-- messages -->
+                </div>
+            </section>
+
+            <!-- RESULT -->
+            <section class="panel result">
+                <h2>Result</h2>
+
+                <div id="resultBox" class="output">
+                    Your generated text will appear here...
+                </div>
+
+                <div class="actions">
+                    <button>Copy</button>
+                    <button>Rewrite</button>
+                    <button>Continue</button>
+                    <button>Export</button>
+                </div>
+            </section>
+
+        </main>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+<script src="writer.js"></script>
+
+</body>
+</html>

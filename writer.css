@@ -1,0 +1,270 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #0f172a;
+    color: #e2e8f0;
+}
+
+/* APP WRAPPER */
+.app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* TOP BAR */
+.top-bar {
+    padding: 25px;
+    text-align: center;
+    background: linear-gradient(135deg, #1e293b, #0f172a);
+    border-bottom: 1px solid #334155;
+}
+
+.top-bar h1 {
+    font-size: 28px;
+    margin-bottom: 8px;
+}
+
+.top-bar p {
+    color: #94a3b8;
+}
+
+/* LAYOUT */
+.container {
+    display: flex;
+    height: calc(100vh - 120px);
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 220px;
+    background: #111827;
+    padding: 20px;
+    border-right: 1px solid #1f2937;
+}
+
+.sidebar h2 {
+    font-size: 14px;
+    color: #94a3b8;
+    margin-bottom: 15px;
+}
+
+.cat {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 10px;
+    background: #1f2937;
+    border: none;
+    color: #e2e8f0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+    text-align: left;
+}
+
+.cat:hover {
+    background: #334155;
+}
+
+.cat,
+.mode,
+.card {
+    transition: all 0.2s ease;
+}
+
+.cat.active,
+.mode.active {
+    background: #4f46e5;
+    color: white;
+    border-color: #4f46e5;
+    box-shadow: 0 0 12px rgba(79, 70, 229, .35);
+}
+
+/* MAIN */
+.main {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    min-width: 0; /* 🔥 ВАЖНО: фикс для flex */
+}
+
+/* PANELS */
+.panel {
+    background: #111827;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    border: 1px solid #1f2937;
+    width: 100%; /* 🔥 добавлено */
+}
+
+/* MODES */
+.modes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 10px;
+    margin-top: 15px;
+}
+
+.card {
+    background: #1f2937;
+    padding: 15px;
+    border-radius: 10px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.card:hover {
+    background: #334155;
+    transform: translateY(-2px);
+}
+
+.card.active {
+    background: #4f46e5;
+    color: white;
+    box-shadow: 0 0 12px rgba(79, 70, 229, .35);
+    transform: translateY(-2px);
+}
+
+.output.loading {
+    opacity: 0.6;
+    font-style: italic;
+}
+
+/* CHAT */
+.chat {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* user message */
+.msg-user {
+    align-self: flex-end;
+    background: #4f46e5;
+    color: white;
+    padding: 10px 14px;
+    border-radius: 12px 12px 0 12px;
+    max-width: 70%;
+}
+
+/* AI message */
+.msg-ai {
+    align-self: flex-start;
+    background: #1f2937;
+    color: #e5e7eb;
+    padding: 10px 14px;
+    border-radius: 12px 12px 12px 0;
+    max-width: 70%;
+}
+
+/* FORM */
+.form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+/* 🔥 FIX ДЛЯ ИНПУТОВ (ВАЖНО) */
+.form input,
+.form textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #334155;
+    background: #0f172a;
+    color: #e2e8f0;
+}
+
+/* textarea */
+.form textarea {
+    min-height: 100px;
+    resize: none;
+}
+
+/* BUTTON */
+.generate {
+    padding: 12px;
+    background: #3b82f6;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.generate:hover {
+    background: #2563eb;
+}
+
+.cancel {
+    padding: 12px;
+    background: #ef4444;
+    border: none;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.cancel:hover {
+    background: #dc2626;
+}
+
+/* RESULT */
+.result .output {
+    background: #0f172a;
+    padding: 15px;
+    border-radius: 8px;
+    margin-top: 10px;
+    min-height: 120px;
+    border: 1px solid #334155;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.actions button {
+    flex: 1;
+    padding: 10px;
+    background: #1f2937;
+    border: none;
+    color: #e2e8f0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.actions button:hover {
+    background: #334155;
+}
+
+/* MOBILE */
+@media (max-width: 900px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        display: flex;
+        overflow-x: auto;
+        gap: 10px;
+    }
+
+    .cat {
+        min-width: 140px;
+    }
+}
