@@ -8,7 +8,7 @@ const generateBtn = document.getElementById("generateBtn");
 const outputChat = document.getElementById("outputChat");
 const cancelBtn = document.getElementById("cancelBtn");
 const API_URL = "https://ai-navigator-backend-mcb3.onrender.com";
-const WRITER_API = `${API_BASE}/api/writer/generate`;
+const WRITER_API = `${API_URL}/api/writer/generate`;
 
 let state = {
     category: "Books",
