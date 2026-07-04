@@ -7,6 +7,8 @@ const MODE = "dev"; //
 const generateBtn = document.getElementById("generateBtn");
 const outputChat = document.getElementById("outputChat");
 const cancelBtn = document.getElementById("cancelBtn");
+const API_URL = "https://ai-navigator-backend-mcb3.onrender.com";
+const WRITER_API = `${API_BASE}/api/writer/generate`;
 
 let state = {
     category: "Books",
@@ -469,65 +471,58 @@ function generateText() {
 
 async function runGenerator() {
 
-     setGenerateButtonState("loading");
+  setGenerateButtonState("loading");
 
-    currentController = new AbortController();
+  currentController = new AbortController();
 
-    const messages = buildMessages();
+  try {
 
-    try {
+    const response = await fetch(WRITER_API, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${localStorage.getItem("token")}`
+      },
+      signal: currentController.signal,
+      body: JSON.stringify({
+        category: state.category,
+        mode: state.mode,
+        formData: state.formData
+      })
+    });
 
-        if (MODE === "dev") {
-            const msg = addMessage("ai", "");
+    const data = await response.json();
 
-             await new Promise(r => setTimeout(r, 5000));
+    const result = data?.result;
 
-            const fake = "DEV MODE RESPONSE:\n\n";
-            await typeText(msg, fake);
-
-            setGenerateButtonState("done");
-            return;
-        }
-
-        const response = await fetchWithRetry(API_URL, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ messages }),
-            signal: currentController.signal
-        });
-
-        const data = await response.json();
-        const result = data?.result || data?.content || data?.text;
-
-        if (!result) {
-            addMessage("ai", "❌ No response from AI.");
-            setGenerateButtonState("ready");
-            return;
-        }
-
-        const msg = addMessage("ai", "");
-        await typeText(msg, result);
-
-        setGenerateButtonState("done");
-
-    } catch (err) {
-
-        if (err.name === "AbortError") {
-            addMessage("ai", "⛔ Generation cancelled");
-            setGenerateButtonState("ready");
-            return;
-        }
-
-        console.error(err);
-        addMessage("ai", "❌ Error: AI request failed.");
-        setGenerateButtonState("ready");
-
-    } finally {
-        currentController = null;
-        isGenerating = false;
+    if (!result) {
+      addMessage("ai", "❌ No response from AI.");
+      setGenerateButtonState("ready");
+      return;
     }
-}
 
+    const msg = addMessage("ai", "");
+    await typeText(msg, result);
+
+    setGenerateButtonState("done");
+
+  } catch (err) {
+
+    if (err.name === "AbortError") {
+      addMessage("ai", "⛔ Generation cancelled");
+      setGenerateButtonState("ready");
+      return;
+    }
+
+    console.error(err);
+    addMessage("ai", "❌ Error: AI request failed.");
+    setGenerateButtonState("ready");
+
+  } finally {
+    currentController = null;
+    isGenerating = false;
+  }
+}
 
 // ========================
 // 8. ИНИЦИАЛИЗАЦИЯ И СОБЫТИЯ
