@@ -531,6 +531,40 @@ document.getElementById("backDashboard").addEventListener("click", () => {
 
 });
 
+
+document.getElementById("premiumBtn").addEventListener("click", async () => {
+
+    try {
+
+        const email = localStorage.getItem("email");
+
+        const res = await fetch("https://ai-navigator-backend.vercel.app/api/stripe/create-checkout-session", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                email: email,
+                module: "writer-studio"   // 🔥 ВАЖНО: это ключ модуля
+            })
+        });
+
+        const data = await res.json();
+
+        if (data.url) {
+            window.location.href = data.url; // Stripe checkout
+        } else {
+            alert("Error creating checkout session");
+        }
+
+    } catch (err) {
+        console.error(err);
+        alert("Payment error");
+    }
+
+});
+
+
 // ========================
 // 8. ИНИЦИАЛИЗАЦИЯ И СОБЫТИЯ
 // ========================
