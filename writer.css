@@ -307,9 +307,8 @@ body {
 
 .premium-box{
       display: flex;
-    flex-direction: column;
-
-     line-height: 1.2;
+      align-items: center;
+    gap: 8px;
 
     background:#1f2937;
 
