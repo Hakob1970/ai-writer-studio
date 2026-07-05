@@ -524,6 +524,17 @@ async function runGenerator() {
   }
 }
 
+
+document.getElementById("backDashboard").addEventListener("click", () => {
+
+    const ok = confirm("Return to AI Navigator?");
+
+    if (!ok) return;
+
+    window.location.href = "https://ai-navigator-frontend.vercel.app/";
+
+});
+
 // ========================
 // 8. ИНИЦИАЛИЗАЦИЯ И СОБЫТИЯ
 // ========================
